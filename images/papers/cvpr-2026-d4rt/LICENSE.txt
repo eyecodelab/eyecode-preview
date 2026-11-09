@@ -1,0 +1,21 @@
+D4RT figure attribution and rights status
+
+This file records provenance and the unresolved permission status; it does not grant a reuse license.
+
+Assets: fig1-overview.webp, fig2-architecture.webp, table3-throughput.webp, fig4-qualitative.webp.
+Source work: Efficiently Reconstructing Dynamic Scenes One D4RT at a Time, Chuhan Zhang et al.
+The local assets are crops of Figures 1, 2 and 4 and Table 3. Their existing in-article captions and linked source citations are retained.
+
+English notice (moved from the article References section):
+The figures and Table 3 are reproduced from the original paper [1] for illustration; copyright remains with the authors (arXiv non-exclusive license). Reuse permission has not been confirmed.
+
+Thông báo tiếng Việt (chuyển từ mục Tài liệu tham khảo):
+Các hình và Bảng 3 được lấy từ bài báo gốc [1] để minh họa; bản quyền thuộc về các tác giả (arXiv non-exclusive license). Quyền tái sử dụng chưa được xác nhận.
+
+[1] Primary paper: https://arxiv.org/abs/2512.08924
+Official PDF: https://storage.googleapis.com/d4rt_assets/D4RT_paper.pdf
+Project: https://d4rt-paper.github.io/
+License record: https://arxiv.org/licenses/nonexclusive-distrib/1.0/license.html
+arXiv license guidance: https://info.arxiv.org/help/license/index.html
+
+Verification: 2026-11-09. The arXiv record and v2 HTML identify the perpetual non-exclusive arXiv distribution license. This grants distribution rights to arXiv; it is not a Creative Commons license or confirmed permission for EyeCode to reproduce figures. No separate permissive license or required notice wording was found in the official project page or the extracted official PDF text. Copyright remains with the rights holders. Preserve source attribution and this status record; author/rightsholder permission remains unconfirmed.

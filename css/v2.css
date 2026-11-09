@@ -657,6 +657,8 @@ body.v2-legacy :where(p,h1,h2,h3,h4,h5,h6,a,li,span,label,button,input,select,te
 .v2-reference-list li{scroll-margin-top:96px}.v2-reference-list li:target{background:var(--v2-blue-light);border-radius:6px}
 .v2-reference-list{list-style:none;margin:0;padding:0;display:grid;gap:12px}
 .v2-reference-list li{display:grid;grid-template-columns:2.75rem minmax(0,1fr);align-items:baseline;font-size:15px;line-height:1.6}
+.v2-reference-list[data-compact]{gap:8px}
+.v2-reference-list[data-compact] li{grid-template-columns:2rem minmax(0,1fr)}
 .v2-ref-num{color:var(--v2-muted);font-variant-numeric:tabular-nums}
 .v2-ref-body a{color:var(--v2-ink);text-decoration:underline;text-decoration-color:var(--v2-line);text-underline-offset:3px;overflow-wrap:anywhere}
 .v2-ref-body a:hover{color:var(--v2-blue);text-decoration-color:currentColor}
@@ -830,3 +832,6 @@ body.v2-legacy :where(p,h1,h2,h3,h4,h5,h6,a,li,span,label,button,input,select,te
  .v2-paper-figure,.v2-table-scroll,.v2-glance{break-inside:avoid}
  .v2-article-layout+.v2-section{padding-block:16px}
 }
+
+/* Editorial status is rendered only by local development builds. */
+.v2-content-status{font-size:11px;line-height:1.4;font-weight:500;text-transform:none;letter-spacing:0;background:var(--v2-soft);color:var(--v2-muted);border:1px solid var(--v2-line)}

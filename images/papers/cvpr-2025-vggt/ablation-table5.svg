@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="system-ui, sans-serif">
-<rect width="1280" height="720" fill="#f4f7fb"/>
-<text x="640" y="62" font-size="34" font-weight="700" text-anchor="middle" fill="#152b47">Attention ablation, ETH3D point map Overall (lower is better)</text>
-<rect x="170" y="193" width="250" height="367" rx="8" fill="#94a3b8"/><text x="295" y="179" font-size="30" font-weight="700" text-anchor="middle" fill="#152b47">1.061</text><text x="295" y="600" font-size="26" text-anchor="middle" fill="#152b47">Cross-attention</text>
-<rect x="520" y="274" width="250" height="286" rx="8" fill="#94a3b8"/><text x="645" y="260" font-size="30" font-weight="700" text-anchor="middle" fill="#152b47">0.827</text><text x="645" y="600" font-size="26" text-anchor="middle" fill="#152b47">Global self-attn only</text>
-<rect x="870" y="315" width="250" height="245" rx="8" fill="#2563eb"/><text x="995" y="301" font-size="30" font-weight="700" text-anchor="middle" fill="#152b47">0.709</text><text x="995" y="600" font-size="26" text-anchor="middle" fill="#152b47">Alternating attention</text>
-<path d="M130 560H1160" stroke="#152b47" stroke-width="3"/><text x="640" y="665" font-size="26" text-anchor="middle" fill="#152b47">Source: VGGT paper, Table 5 (same parameter count, 2L attention layers). EyeCode chart.</text>
-</svg>

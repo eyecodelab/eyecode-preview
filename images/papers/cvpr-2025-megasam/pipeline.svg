@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="system-ui, sans-serif" font-size="30">
-<rect width="1280" height="720" fill="#f4f7fb"/>
-<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#152b47"/></marker></defs>
-<text x="640" y="70" text-anchor="middle" fill="#152b47" font-size="38" font-weight="700">MegaSaM data flow</text>
-<g fill="#2563eb"><rect x="40" y="150" width="340" height="120" rx="14"/><rect x="470" y="150" width="340" height="120" rx="14"/><rect x="900" y="150" width="340" height="120" rx="14"/><rect x="40" y="430" width="340" height="120" rx="14"/><rect x="470" y="430" width="340" height="120" rx="14"/><rect x="900" y="430" width="340" height="120" rx="14"/></g>
-<g fill="#fff" text-anchor="middle"><text x="210" y="222">Casual video</text><text x="640" y="205">Mono depth</text><text x="640" y="245">to metric scale</text><text x="1070" y="205">Camera tracking</text><text x="1070" y="245">+ motion map</text><text x="210" y="485">Uncertainty-aware</text><text x="210" y="525">global BA</text><text x="640" y="470">Consistent</text><text x="640" y="510">depth stage</text><text x="1070" y="485">Poses, focal,</text><text x="1070" y="525">video depth</text></g>
-<g stroke="#152b47" stroke-width="5" marker-end="url(#a)"><line x1="380" y1="210" x2="465" y2="210"/><line x1="810" y1="210" x2="895" y2="210"/><line x1="1070" y1="275" x2="1070" y2="320" /><line x1="210" y1="330" x2="210" y2="425"/><line x1="380" y1="490" x2="465" y2="490"/><line x1="810" y1="490" x2="895" y2="490"/></g>
-<path d="M1070 320 H210" stroke="#152b47" stroke-width="5" fill="none"/>
-</svg>
