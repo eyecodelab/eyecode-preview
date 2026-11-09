@@ -1,0 +1,15 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//EyeCode Tech//Research deadlines//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:acl-2027-full@eyecodetech.com
+DTSTAMP:20261109T000000Z
+DTSTART:20270105T115900Z
+SUMMARY:ACL 2027 · full submission
+DESCRIPTION:Official deadline: 2027-01-04T23:59:00-12:00 (AoE · UTC−12:0
+ 0). Verified 2026-11-09.  Source: https://2027.aclweb.org/calls/main/
+URL:https://2027.aclweb.org/calls/main/
+END:VEVENT
+END:VCALENDAR

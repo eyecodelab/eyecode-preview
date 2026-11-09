@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//EyeCode Tech//Research deadlines//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:ismar-2026-abstract@eyecodetech.com
+DTSTAMP:20261109T000000Z
+DTSTART:20260310T115900Z
+SUMMARY:ISMAR 2026 · abstract submission
+DESCRIPTION:Official deadline: 2026-03-09T23:59:00-12:00 (AoE · UTC−12:0
+ 0). Verified 2026-11-09.  Source: https://www.ieeeismar.net/2026/call-for-
+ papers/
+URL:https://www.ieeeismar.net/2026/call-for-papers/
+END:VEVENT
+END:VCALENDAR

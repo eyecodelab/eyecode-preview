@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="system-ui, sans-serif"><rect width="1280" height="720" fill="#f4f7fb"/>
+<text x="640" y="56" font-size="34" font-weight="700" fill="#152b47" text-anchor="middle">Shape quality grows stage by stage</text>
+<text x="640" y="98" font-size="26" fill="#152b47" text-anchor="middle">F1@0.01 on SA-3DAO, higher is better</text>
+<g stroke="#c8d3e3" stroke-width="2"><line x1="100" y1="560" x2="1230" y2="560"/><line x1="100" y1="360" x2="1230" y2="360"/><line x1="100" y1="160" x2="1230" y2="160"/></g>
+<text x="90" y="568" font-size="24" fill="#152b47" text-anchor="end">0</text><text x="90" y="368" font-size="24" fill="#152b47" text-anchor="end">0.125</text><text x="90" y="168" font-size="24" fill="#152b47" text-anchor="end">0.25</text>
+<g fill="#2563eb"><rect x="120" y="344" width="150" height="216" rx="6"/><rect x="310" y="287" width="150" height="273" rx="6"/><rect x="500" y="236" width="150" height="324" rx="6"/><rect x="690" y="215" width="150" height="345" rx="6"/><rect x="880" y="187" width="150" height="373" rx="6"/></g>
+<rect x="1070" y="185" width="150" height="375" rx="6" fill="#152b47"/>
+<g font-size="26" font-weight="700" fill="#152b47" text-anchor="middle"><text x="195" y="334">0.1349</text><text x="385" y="277">0.1705</text><text x="575" y="226">0.2027</text><text x="765" y="205">0.2156</text><text x="955" y="177">0.2331</text><text x="1145" y="175">0.2344</text></g>
+<g font-size="24" fill="#152b47" text-anchor="middle"><text x="195" y="598">Pretrain</text><text x="195" y="628">(Iso-3DO)</text><text x="385" y="598">+ Mid-train</text><text x="385" y="628">(RP-3DO)</text><text x="575" y="598">+ SFT</text><text x="575" y="628">(MITL-3DO)</text><text x="765" y="598">+ DPO</text><text x="765" y="628">(MITL-3DO)</text><text x="955" y="598">+ SFT</text><text x="955" y="628">(Art-3DO)</text><text x="1145" y="598">+ DPO</text><text x="1145" y="628">(Art-3DO)</text></g>
+<text x="640" y="690" font-size="24" fill="#152b47" text-anchor="middle">Source: Table 4 of arXiv 2511.16624, values as printed</text></svg>

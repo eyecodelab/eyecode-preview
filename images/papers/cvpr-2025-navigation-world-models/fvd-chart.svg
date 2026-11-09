@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="system-ui, sans-serif">
+<rect width="1280" height="720" fill="#f4f7fb"/>
+<text x="640" y="52" font-size="36" font-weight="700" fill="#152b47" text-anchor="middle">FVD of 16-second videos (lower is better)</text>
+<rect x="400" y="80" width="28" height="28" fill="#94a3b8"/><text x="440" y="104" font-size="26" fill="#152b47">DIAMOND</text>
+<rect x="640" y="80" width="28" height="28" fill="#2563eb"/><text x="680" y="104" font-size="26" fill="#152b47">NWM</text>
+<path d="M100 600H1240" stroke="#152b47" stroke-width="3"/>
+<g font-size="26" fill="#152b47" text-anchor="middle">
+<rect x="150" y="463" width="110" height="137" fill="#94a3b8"/><text x="205" y="450">762.7</text>
+<rect x="270" y="564" width="110" height="36" fill="#2563eb"/><text x="325" y="551">201.0</text>
+<text x="265" y="645">RECON</text>
+<rect x="450" y="442" width="110" height="158" fill="#94a3b8"/><text x="505" y="429">882.0</text>
+<rect x="570" y="550" width="110" height="50" fill="#2563eb"/><text x="625" y="537">276.9</text>
+<text x="565" y="645">HuRoN</text>
+<rect x="750" y="190" width="110" height="410" fill="#94a3b8"/><text x="805" y="177">2289.7</text>
+<rect x="870" y="511" width="110" height="89" fill="#2563eb"/><text x="925" y="498">494.2</text>
+<text x="865" y="645">TartanDrive</text>
+<rect x="1050" y="251" width="90" height="349" fill="#94a3b8"/><text x="1095" y="238">1945.1</text>
+<rect x="1150" y="528" width="90" height="72" fill="#2563eb"/><text x="1195" y="515">401.7</text>
+<text x="1145" y="645">SCAND</text>
+</g>
+<text x="640" y="695" font-size="24" fill="#152b47" text-anchor="middle">EyeCode chart of Table 6, arXiv 2412.03572 (RECON, HuRoN, TartanDrive, SCAND)</text>
+</svg>

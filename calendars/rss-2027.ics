@@ -1,0 +1,39 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//EyeCode Tech//Research deadlines//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:rss-2027-abstract@eyecodetech.com
+DTSTAMP:20261108T000000Z
+DTSTART:20261205T115900Z
+SUMMARY:RSS 2027 · Extended abstract
+DESCRIPTION:Official deadline: 2026-12-04T23:59:00-12:00 (AoE · UTC−12:0
+ 0). Verified 2026-11-08. Multi-stage process: an extended abstract is requ
+ ired before invitation to submit a final paper. Source: https://roboticsco
+ nference.org/
+URL:https://roboticsconference.org/
+END:VEVENT
+BEGIN:VEVENT
+UID:rss-2027-full@eyecodetech.com
+DTSTAMP:20261108T000000Z
+DTSTART:20270417T115900Z
+SUMMARY:RSS 2027 · Final paper · invited stage
+DESCRIPTION:Official deadline: 2027-04-16T23:59:00-12:00 (AoE · UTC−12:0
+ 0). Verified 2026-11-08. Multi-stage process: an extended abstract is requ
+ ired before invitation to submit a final paper. Source: https://roboticsco
+ nference.org/
+URL:https://roboticsconference.org/
+END:VEVENT
+BEGIN:VEVENT
+UID:rss-2027-supplementary@eyecodetech.com
+DTSTAMP:20261108T000000Z
+DTSTART:20270420T115900Z
+SUMMARY:RSS 2027 · supplementary submission
+DESCRIPTION:Official deadline: 2027-04-19T23:59:00-12:00 (AoE · UTC−12:0
+ 0). Verified 2026-11-08. Multi-stage process: an extended abstract is requ
+ ired before invitation to submit a final paper. Source: https://roboticsco
+ nference.org/
+URL:https://roboticsconference.org/
+END:VEVENT
+END:VCALENDAR

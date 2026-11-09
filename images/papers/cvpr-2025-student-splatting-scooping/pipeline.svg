@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="system-ui, sans-serif" font-size="28">
+<rect width="1280" height="720" fill="#f4f7fb"/>
+<text x="640" y="70" text-anchor="middle" fill="#152b47" font-size="36" font-weight="700">Student Splatting and Scooping</text>
+<g fill="#2563eb"><rect x="60" y="150" width="320" height="130" rx="14"/><rect x="480" y="150" width="320" height="130" rx="14"/><rect x="900" y="150" width="320" height="130" rx="14"/><rect x="900" y="420" width="320" height="130" rx="14"/><rect x="480" y="420" width="320" height="130" rx="14"/><rect x="60" y="420" width="320" height="130" rx="14"/></g>
+<g fill="#fff" text-anchor="middle"><text x="220" y="205">SfM points</text><text x="220" y="245">+ photos</text>
+<text x="640" y="205">Student-t blobs</text><text x="640" y="245">(+ and - weights)</text>
+<text x="1060" y="205">Render and</text><text x="1060" y="245">compare images</text>
+<text x="1060" y="475">SGHMC update</text><text x="1060" y="515">of positions</text>
+<text x="640" y="475">Recycle faint</text><text x="640" y="515">components</text>
+<text x="220" y="475">Final scene</text><text x="220" y="515">model</text></g>
+<g stroke="#152b47" stroke-width="5" fill="none"><path d="M380 215H462"/><path d="M800 215H882"/><path d="M1060 280V402"/><path d="M900 485H818"/><path d="M480 485H398"/></g><g fill="#152b47"><path d="M478 215l-20-12v24z"/><path d="M898 215l-20-12v24z"/><path d="M1060 418l-12-20h24z"/><path d="M802 485l20-12v24z"/><path d="M382 485l20-12v24z"/></g>
+<text x="640" y="650" text-anchor="middle" fill="#152b47">Burn-in without friction, then full sampling</text>
+</svg>

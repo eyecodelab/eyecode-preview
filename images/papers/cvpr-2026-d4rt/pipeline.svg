@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="system-ui, sans-serif">
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0L10,5L0,10z" fill="#152b47"/></marker></defs>
+<rect width="1280" height="720" fill="#f4f7fb"/>
+<text x="640" y="80" font-size="42" font-weight="700" fill="#152b47" text-anchor="middle">D4RT: encode once, query anywhere</text>
+<rect x="40" y="200" width="260" height="120" rx="14" fill="#2563eb"/><text x="170" y="272" font-size="30" fill="#fff" text-anchor="middle">Video clip</text>
+<rect x="420" y="200" width="320" height="120" rx="14" fill="#2563eb"/><text x="580" y="252" font-size="30" fill="#fff" text-anchor="middle">Encoder</text><text x="580" y="292" font-size="28" fill="#fff" text-anchor="middle">scene tokens</text>
+<rect x="860" y="200" width="360" height="120" rx="14" fill="#2563eb"/><text x="1040" y="252" font-size="30" fill="#fff" text-anchor="middle">Light decoder</text><text x="1040" y="292" font-size="28" fill="#fff" text-anchor="middle">cross-attention</text>
+<rect x="600" y="500" width="300" height="120" rx="14" fill="#2563eb"/><text x="750" y="552" font-size="30" fill="#fff" text-anchor="middle">Point query</text><text x="750" y="592" font-size="28" fill="#fff" text-anchor="middle">pixel + 3 times</text>
+<rect x="960" y="500" width="260" height="120" rx="14" fill="#2563eb"/><text x="1090" y="552" font-size="30" fill="#fff" text-anchor="middle">3D point</text><text x="1090" y="592" font-size="28" fill="#fff" text-anchor="middle">per query</text>
+<path d="M300 260H414" stroke="#152b47" stroke-width="5" marker-end="url(#a)"/>
+<path d="M740 260H854" stroke="#152b47" stroke-width="5" marker-end="url(#a)"/>
+<path d="M870 500V326" stroke="#152b47" stroke-width="5" marker-end="url(#a)"/>
+<path d="M1150 320V494" stroke="#152b47" stroke-width="5" marker-end="url(#a)"/>
+<text x="300" y="570" font-size="28" fill="#152b47" text-anchor="middle">queries are independent</text>
+</svg>

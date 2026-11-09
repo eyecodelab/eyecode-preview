@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//EyeCode Tech//Research deadlines//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:ijcai-2027-abstract@eyecodetech.com
+DTSTAMP:20261108T000000Z
+DTSTART:20270105T115900Z
+SUMMARY:IJCAI 2027 · abstract submission
+DESCRIPTION:Official deadline: 2027-01-04T23:59:00-12:00 (AoE · UTC−12:0
+ 0). Verified 2026-11-08.  Source: https://2027.ijcai.org/ijcai-2027-call-f
+ or-papers-main-track/
+URL:https://2027.ijcai.org/ijcai-2027-call-for-papers-main-track/
+END:VEVENT
+END:VCALENDAR

@@ -1,0 +1,17 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//EyeCode Tech//Research deadlines//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:icra-2027-full@eyecodetech.com
+DTSTAMP:20261108T000000Z
+DTSTART:20260917T075900Z
+SUMMARY:ICRA 2027 · full submission
+DESCRIPTION:Official deadline: 2026-09-16T23:59:00-08:00 (PST · UTC−08:0
+ 0). Verified 2026-11-08. Uses the September 16 extension in the official I
+ mportant Deadlines list. Source: https://2027.ieee-icra.org/announcements/
+ call-for-technical-papers/
+URL:https://2027.ieee-icra.org/announcements/call-for-technical-papers/
+END:VEVENT
+END:VCALENDAR

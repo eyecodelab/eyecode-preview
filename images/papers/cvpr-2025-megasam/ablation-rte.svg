@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="system-ui, sans-serif" font-size="28">
+<rect width="1280" height="720" fill="#f4f7fb"/>
+<text x="640" y="62" text-anchor="middle" fill="#152b47" font-size="38" font-weight="700">Ablation on Sintel: relative translation error (RTE)</text>
+<text x="640" y="104" text-anchor="middle" fill="#152b47" font-size="26">Each bar removes or swaps one design choice</text>
+<text x="404" y="173" text-anchor="end" fill="#152b47">Full system</text><rect x="420" y="140" width="38" height="46" rx="6" fill="#2563eb"/><text x="470" y="173" fill="#152b47" font-weight="700">0.008</text>
+<text x="404" y="243" text-anchor="end" fill="#152b47">w/o u-BA</text><rect x="420" y="210" width="62" height="46" rx="6" fill="#94a3b8"/><text x="494" y="243" fill="#152b47" font-weight="700">0.013</text>
+<text x="404" y="313" text-anchor="end" fill="#152b47">DROID-SLAM</text><rect x="420" y="280" width="106" height="46" rx="6" fill="#94a3b8"/><text x="538" y="313" fill="#152b47" font-weight="700">0.022</text>
+<text x="404" y="383" text-anchor="end" fill="#152b47">w/o mono-init</text><rect x="420" y="350" width="125" height="46" rx="6" fill="#94a3b8"/><text x="557" y="383" fill="#152b47" font-weight="700">0.026</text>
+<text x="404" y="453" text-anchor="end" fill="#152b47">w/o movement map</text><rect x="420" y="420" width="610" height="46" rx="6" fill="#94a3b8"/><text x="1042" y="453" fill="#152b47" font-weight="700">0.127</text>
+<text x="404" y="523" text-anchor="end" fill="#152b47">w/o 2-stage train</text><rect x="420" y="490" width="653" height="46" rx="6" fill="#94a3b8"/><text x="1085" y="523" fill="#152b47" font-weight="700">0.136</text>
+<line x1="420" y1="132" x2="420" y2="570" stroke="#152b47" stroke-width="3"/>
+<text x="640" y="640" text-anchor="middle" fill="#152b47" font-size="26">Lower is better. Source: Table 5, arXiv 2412.04463</text>
+<text x="640" y="684" text-anchor="middle" fill="#152b47" font-size="24">EyeCode chart, values copied from the paper</text>
+</svg>

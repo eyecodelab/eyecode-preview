@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="system-ui, sans-serif"><rect width="1280" height="720" fill="#f4f7fb"/>
+<text x="50" y="70" fill="#152b47" font-size="36" font-weight="700">What one active O-Voxel stores</text>
+<text x="50" y="112" fill="#152b47" font-size="26">Only voxels touched by the surface are kept (sparse). Source: Sec. 3.1 of the paper.</text>
+<rect x="50" y="150" width="560" height="440" rx="16" fill="#2563eb"/>
+<text x="80" y="205" fill="#fff" font-size="32" font-weight="700">Shape: Flexible Dual Grid</text>
+<text x="80" y="270" fill="#fff" font-size="28" font-weight="600">Dual vertex v (inside the voxel)</text>
+<text x="80" y="305" fill="#dbe7ff" font-size="25">3 numbers in [0,1]</text>
+<text x="80" y="370" fill="#fff" font-size="28" font-weight="600">Edge intersection flags</text>
+<text x="80" y="405" fill="#dbe7ff" font-size="25">3 bits (X, Y, Z edges) set the quads</text>
+<text x="80" y="470" fill="#fff" font-size="28" font-weight="600">Splitting weight</text>
+<text x="80" y="505" fill="#dbe7ff" font-size="25">1 positive value: splits a quad into 2 triangles</text>
+<rect x="670" y="150" width="560" height="440" rx="16" fill="#0f766e"/>
+<text x="700" y="205" fill="#fff" font-size="32" font-weight="700">Material: PBR, 6 channels</text>
+<text x="700" y="270" fill="#fff" font-size="28" font-weight="600">Base color</text>
+<text x="700" y="305" fill="#d6f5f0" font-size="25">3 channels (RGB)</text>
+<text x="700" y="370" fill="#fff" font-size="28" font-weight="600">Metallic and roughness</text>
+<text x="700" y="405" fill="#d6f5f0" font-size="25">1 channel each</text>
+<text x="700" y="470" fill="#fff" font-size="28" font-weight="600">Opacity</text>
+<text x="700" y="505" fill="#d6f5f0" font-size="25">1 channel: handles glass-like surfaces</text>
+<text x="50" y="650" fill="#152b47" font-size="28">No signed distance field: edges are flagged directly from the mesh surface.</text>
+</svg>

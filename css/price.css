@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap');
+
+   .toggle-switch {
+      display: inline-flex;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      overflow: hidden;
+    }
+    .toggle-switch button {
+      border: none;
+      outline: none;
+      padding: 8px 20px;
+      background: none;
+      font-weight: 500;
+      color: #333;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+       font-size: 2.0rem;
+    }
+    .toggle-switch button i {
+      margin-right: 6px;
+    }
+    .toggle-switch .active {
+      background-color: #f0fff4;
+      color: #28a745;
+      font-weight: bold;
+    }
+
+    .tab-button {
+      padding: 6px 16px;
+      background: #f1f1f1;
+      border: none;
+      margin: 0 4px;
+      border-radius: 6px;
+      font-weight: bold;
+      color: #333;
+      cursor: pointer;
+      font-size: 1.35rem;
+    }
+      .floating-contact {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .fc-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .fc-icon img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .fc-icon i {
+            font-size: 22px;
+        }
+
+        .fc-icon.call {
+            background-color: #ff6600;
+            color: white;
+        }
+
+        .fc-icon.messenger {
+            background-color: #0084ff;
+            color: white;
+        }
+
+        .fc-icon.zalo {
+            background-color: #ffffff;
+            border: 1px solid #0084ff;
+        }
+    .tab-button.active {
+      background-color: #06b6d4;
+      color: white;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .table td,
+    .table th {
+      vertical-align: middle;
+      font-size: 15px;
+    }
+    .table td:first-child {
+      text-align: left;
+      font-weight: 600;
+    }
+    #tab-all .card {
+      border: 2px solid transparent;
+      background-clip: padding-box, border-box;
+      background-origin: border-box;
+      background-image:
+        linear-gradient(#fff, #fff),
+        linear-gradient(45deg, rgb(0,184,148),  rgb(0,184,148), rgb(0,184,148),  rgb(0,184,148));
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%, 100% 100%;
+      border-radius: 12px;
+      font-size: 1.5rem;
+      padding: 1.2rem;
+    }
+    .tab-style .card {
+      border-radius: 12px;
+      border: 2px solid transparent;
+      background-clip: padding-box, border-box;
+      background-origin: border-box;
+      background-image:
+        linear-gradient(#fff, #fff),
+        linear-gradient(45deg, rgb(0,184,148), rgb(0,184,148));
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%, 100% 100%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      font-size: 1.5rem;
+      padding: 1.2rem;
+    }
+
+    .tab-style .card:not(.border-success) {
+      border: 2px solid transparent;
+      background-clip: padding-box, border-box;
+      background-origin: border-box;
+      background-image:
+        linear-gradient(#fff, #fff),
+        linear-gradient(45deg, rgb(0,184,148), rgb(0,184,148), rgb(0,184,148));
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 100% 100%, 100% 100%;
+      border-radius: 12px;
+      font-size: 1.5rem;
+      padding: 1.2rem;
+    }
+    td.check {
+      color: #22c55e;
+      font-weight: bold;
+    }
+
+    td.cross {
+      color: #ef4444;
+      font-weight: bold;
+    }
+    .pricing-gradient-border {
+        padding: 2px;
+        border-radius: 16px;
+        background: linear-gradient(45deg, #06b6d4, #0ea5e9); /* Xanh ngọc dương */
+        display: inline-block;
+        margin: 0 auto;
+      }
+
+      .table-wrapper-inside {
+        background-color: white;
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .table-responsive table {
+        border-collapse: separate !important;
+        border-spacing: 0;
+      }
+    .ribbon {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background-color: #007f00;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 8px;
+      line-height: 1;
+      z-index: 1;
+      font-size: 1.25rem;
+    }
+    .dropdown .btn-outline-primary {
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-weight: 600;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background-color: white;
+      color: #007bff;
+      border: 2px solid #007bff;
+      transition: all 0.3s ease;
+    }
+
+    .dropdown .btn-outline-primary:hover {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .dropdown .dropdown-menu {
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      font-size: 1rem;
+    }
+    .card { border-radius: 12px; border: 1px solid #eee; }
+    .card-header { font-weight: bold; font-size: 1.5rem; }
+    .card-body ul { list-style: none; padding-left: 0; }
+    .card-body ul li::before { content: '\2714'; color: green; margin-right: 6px; }
+    .table td, .table th { vertical-align: middle; font-size: 15px; }
+    .table td:first-child { text-align: left; font-weight: 600; }
+
+    .navbar .dropdown {
+    display: flex;
+    align-items: center;
+    margin-left: 16px;
+    margin-top: -15px;
+    }

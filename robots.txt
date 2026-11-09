@@ -1,0 +1,3 @@
+# Preview pages declare noindex in their HTML.
+User-agent: *
+Allow: /

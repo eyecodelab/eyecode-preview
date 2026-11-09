@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//EyeCode Tech//Research deadlines//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:eccv-2026-abstract@eyecodetech.com
+DTSTAMP:20261108T000000Z
+DTSTART:20260226T220000Z
+SUMMARY:ECCV 2026 · abstract submission
+DESCRIPTION:Official deadline: 2026-02-26T23:00:00+01:00 (CET · UTC+01:00)
+ . Verified 2026-11-08.  Source: https://eccv.ecva.net/Conferences/2026/Cal
+ lForPapers
+URL:https://eccv.ecva.net/Conferences/2026/CallForPapers
+END:VEVENT
+END:VCALENDAR

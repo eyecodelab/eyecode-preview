@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap');
+        .floating-contact {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .fc-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+        .fc-icon img {
+            width: 28px;
+            height: 28px;
+        }
+
+        .fc-icon i {
+            font-size: 22px;
+        }
+
+        .fc-icon.call {
+            background-color: #ff6600;
+            color: white;
+        }
+
+        .fc-icon.messenger {
+            background-color: #0084ff;
+            color: white;
+        }
+
+        .fc-icon.zalo {
+            background-color: #ffffff;
+            border: 1px solid #0084ff;
+        }
+        .career-heading {
+            text-align: center;
+            margin-bottom: 20px;
+        }z
+        .career-heading p {
+            font-size: 18px;
+            color: #555;
+        }
+        .blog-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        .blog-links {
+            width: 100%;
+            text-align: left;
+            padding: 30px;
+        }
+        .blog-links ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .blog-links li {
+            margin: 10px 0;
+        }
+        .blog-links a {
+            text-decoration: none;
+            color: blue;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+        .blog-links a:hover {
+            text-decoration: underline;
+            color: darkblue;
+        }
+        .logo img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+            display: block;
+        }
+        .lang-switcher {
+            border-radius: 999px;
+            padding: 6px 16px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background-color: white;
+            color: #007bff;
+            border: 2px solid #007bff;
+            transition: all 0.3s ease;
+        }
+
+        .lang-switcher:hover {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .dropdown .dropdown-menu {
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+        }
+        .dropdown .btn-outline-primary {
+            border-radius: 999px;
+            padding: 6px 16px;
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background-color: white;
+            color: #007bff;
+            border: 2px solid #007bff;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown .btn-outline-primary:hover {
+            background-color: #007bff;
+            color: white;
+        }

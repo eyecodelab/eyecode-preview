@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;1,100;1,300;1,400;1,500&display=swap');
+        .logo img {
+        height: 48px;
+        width: auto;
+        object-fit: contain;
+        display: block;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            border-radius: 25px;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+        }
+
+        .contact-form textarea {
+            resize: vertical;
+        }
+        .contact-form button {
+            border-radius: 25px;
+        }
+        .btn-always-glow {
+            background-color: #0d305e;
+            border: 2px solid #001f4d;
+            box-shadow: 0 0 6px #001f4d;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .btn-always-glow:hover {
+            background-color: #093267;
+        }
+
+/* Deployment-safe homepage Training and Contact sections. */
+.homepage-program,
+.homepage-program *,
+.contact.homepage-contact,
+.contact.homepage-contact * {
+    box-sizing: border-box;
+    text-transform: none;
+}
+
+.homepage-program {
+    width: 100%;
+    padding: 80px 20px;
+    background: #fff;
+    text-align: center;
+}
+
+.homepage-program .homepage-program-inner {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 34px 30px;
+    border: 1px solid #dbe3ec;
+    border-top: 4px solid #1464c0;
+    border-radius: 8px;
+    background: #f8fafc;
+    box-shadow: 0 10px 26px rgba(0,46,95,.07);
+}
+
+.homepage-program .homepage-program-label {
+    margin: 0 0 14px;
+    color: #1464c0;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: .08em;
+}
+
+.homepage-program h2 {
+    max-width: 900px;
+    margin: 0 auto 22px;
+    color: #002e5f;
+    font-size: clamp(30px,3vw,38px);
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.homepage-program .homepage-program-description,
+.homepage-program .homepage-program-support {
+    max-width: 900px;
+    margin: 0 auto 10px;
+    color: #5b6678;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.homepage-program .homepage-program-meta {
+    margin: 22px 0 0;
+    color: #002e5f;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.homepage-program .homepage-program-date {
+    margin: 10px 0 0;
+    color: #34435a;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.homepage-program .homepage-program-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 26px;
+}
+
+.homepage-program .homepage-program-primary,
+.homepage-program .homepage-program-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 11px 22px;
+    font-size: 16px;
+    line-height: 1.2;
+    text-decoration: none;
+}
+
+.homepage-program .homepage-program-primary {
+    border: 1px solid #002e5f;
+    border-radius: 5px;
+    background: #002e5f;
+    color: #fff;
+    font-weight: 600;
+}
+
+.homepage-program .homepage-program-secondary {
+    color: #1464c0;
+    font-weight: 500;
+}
+
+.homepage-program .homepage-program-secondary:hover,
+.homepage-program .homepage-program-secondary:focus {
+    text-decoration: underline;
+}
+
+.contact.homepage-contact {
+    width: 100%;
+    padding: 70px 20px 80px;
+    background: #f8f9fa;
+    text-align: center;
+}
+
+body .contact.homepage-contact .heading {
+    margin: 0 0 28px;
+    padding-top: 0;
+    font-size: clamp(34px,3vw,42px);
+    line-height: 1.25;
+}
+
+body .contact.homepage-contact .heading::before {
+    top: -2px;
+}
+
+.contact.homepage-contact .homepage-contact-card {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 30px;
+    border: 1px solid #dbe3ec;
+    border-radius: 8px;
+    background: #fff;
+    box-shadow: 0 8px 22px rgba(0,46,95,.07);
+}
+
+.contact.homepage-contact .homepage-contact-card > p {
+    max-width: 850px;
+    margin: 0 auto 20px;
+    color: #5b6678;
+    font-size: 17px;
+    line-height: 1.6;
+}
+
+.contact.homepage-contact .homepage-contact-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px 28px;
+    color: #34435a;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+.contact.homepage-contact .homepage-contact-links span,
+.contact.homepage-contact .homepage-contact-links a,
+.contact.homepage-contact .homepage-contact-links strong {
+    font-size: inherit;
+}
+
+.contact.homepage-contact .homepage-contact-links a {
+    color: #1464c0;
+    text-decoration: none;
+}
+
+.contact.homepage-contact .homepage-contact-links a:hover,
+.contact.homepage-contact .homepage-contact-links a:focus {
+    text-decoration: underline;
+}
+
+@media (max-width:768px) {
+    .homepage-program,
+    .contact.homepage-contact {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .homepage-program {
+        padding-top: 56px;
+        padding-bottom: 56px;
+    }
+
+    .homepage-program .homepage-program-inner,
+    .contact.homepage-contact .homepage-contact-card {
+        padding: 26px 20px;
+    }
+
+    .homepage-program h2 {
+        font-size: clamp(27px,7vw,30px);
+    }
+
+    .homepage-program .homepage-program-description,
+    .homepage-program .homepage-program-support,
+    .contact.homepage-contact .homepage-contact-card > p {
+        font-size: 16px;
+    }
+
+    .contact.homepage-contact {
+        padding-top: 56px;
+        padding-bottom: 60px;
+    }
+}
+
+@media (max-width:600px) {
+    .homepage-program .homepage-program-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .homepage-program .homepage-program-primary,
+    .homepage-program .homepage-program-secondary {
+        width: 100%;
+    }
+
+    .contact.homepage-contact .homepage-contact-links {
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+    }
+}

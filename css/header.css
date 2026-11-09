@@ -1,0 +1,31 @@
+/* Canonical site header, based on the homepage implementation. */
+body .header{display:flex;align-items:center;justify-content:space-between;height:76px;min-height:76px;padding:0 20px}
+body .header .logo{display:flex;align-items:center}
+body .header .logo img{display:block;width:100px;height:auto;object-fit:contain}
+body .header .navbar{display:flex;align-items:center;flex-wrap:nowrap;padding:0}
+body .header .navbar ul{display:flex;align-items:center;flex-wrap:nowrap;margin:0;padding:0}
+body .header .navbar ul li{display:flex;align-items:center;margin:0}
+body .header .navbar ul li a{display:flex;align-items:center;height:40px;padding:0 10px;font-family:'Roboto',sans-serif;font-size:clamp(15px,1.1vw,17px);font-weight:500;line-height:1.2;letter-spacing:normal;white-space:nowrap}
+body .header .navbar ul li a.nav-active{color:#00bfff;text-decoration:underline}
+body .header .navbar .dropdown{display:flex;align-items:center;margin:0 0 0 22px}
+body .header .lang-switcher{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:40px;padding:0 14px;border:2px solid #007bff;border-radius:20px;background:#fff;color:#007bff;font-size:14px;font-weight:600;line-height:1.2}
+body .header .lang-switcher:hover,body .header .lang-switcher:focus{background:#007bff;color:#fff}
+body .header .dropdown-menu{border-radius:12px;box-shadow:0 8px 16px rgba(0,0,0,.1);font-size:14px}
+@media(max-width:1199px){body .header .logo img{width:88px}}
+@media(max-width:1000px){body .header{height:66px;min-height:66px;padding:0 16px}body .header .logo img{width:82px}body .header .navbar{align-items:center;flex-direction:column;flex-wrap:nowrap;padding:0}body .header .navbar ul{align-items:center;flex-flow:column}body .header .navbar ul li{margin:6px 0}body .header .navbar ul li a{height:40px;padding:0 14px;color:grey;font-size:18px}body .header .navbar .dropdown{justify-content:center;margin:12px 0 16px}body .header .nav-toggle{top:66px}}
+@media(max-width:767px){body .header{height:64px;min-height:64px}body .header .logo img{width:72px}body .header .nav-toggle{top:64px}}
+
+/* Canonical site footer shared by all public pages. */
+.site-footer,.site-footer *{text-transform:none}
+.site-footer{background:#001f40;color:#cad8e7;font-family:'Roboto',sans-serif}
+.site-footer-main{display:grid;grid-template-columns:minmax(180px,1.2fr) minmax(150px,.8fr) minmax(280px,1.4fr) minmax(200px,1fr);align-items:start;gap:40px 56px;width:min(1200px,calc(100% - 40px));margin:0 auto;padding:44px 0 40px}
+.site-footer-brand p{margin:0;color:#fff;font-size:16px;font-weight:600;line-height:1.55}
+.site-footer h2{margin:0 0 12px;color:#fff;font-size:16px;font-weight:700;line-height:1.4}
+.site-footer a{display:block;width:max-content;max-width:100%;margin:5px 0;color:#cad8e7;font-size:15px;line-height:1.5;text-decoration:none;overflow-wrap:anywhere}
+.site-footer a:hover,.site-footer a:focus{color:#fff;text-decoration:underline}
+.footer-office-item+.footer-office-item{margin-top:14px}
+.footer-office-item strong{display:block;margin-bottom:3px;color:#fff;font-size:15px;font-weight:600;line-height:1.45}
+.footer-office-item p{margin:0;color:#cad8e7;font-size:15px;line-height:1.55}
+.site-footer-bottom{padding:16px 20px;border-top:1px solid rgba(255,255,255,.15);color:#cad8e7;font-size:13px;line-height:1.5;text-align:center}
+@media(max-width:1024px){.site-footer-main{grid-template-columns:1fr 1fr;gap:32px 48px}}
+@media(max-width:600px){.site-footer-main{grid-template-columns:1fr;gap:24px;width:min(100% - 32px,1200px);padding:36px 0 32px}}

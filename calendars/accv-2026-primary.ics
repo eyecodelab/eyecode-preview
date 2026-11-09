@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//EyeCode Tech//Research deadlines//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:accv-2026-abstract@eyecodetech.com
+DTSTAMP:20261108T000000Z
+DTSTART:20260703T235900Z
+SUMMARY:ACCV 2026 · abstract submission
+DESCRIPTION:Official deadline: 2026-07-03T23:59:00Z (GMT · UTC+00:00). Ver
+ ified 2026-11-08.  Source: https://accv2026.org/submissions/author-guideli
+ nes/
+URL:https://accv2026.org/submissions/author-guidelines/
+END:VEVENT
+END:VCALENDAR

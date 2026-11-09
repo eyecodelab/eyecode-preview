@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" font-family="system-ui, sans-serif" font-size="24">
+<rect width="1280" height="720" fill="#f4f7fb"/>
+<text x="640" y="56" text-anchor="middle" fill="#152b47" font-size="36" font-weight="700">Ablation on Tanks &amp; Temples</text>
+<text x="640" y="100" text-anchor="middle" fill="#152b47">PSNR (dB), average of 2 scenes; bar axis starts at 22 dB</text>
+<text x="50" y="198" fill="#152b47">3DGS</text><rect x="450" y="160" width="249" height="60" rx="6" fill="#94a3b8"/><text x="713" y="200" fill="#152b47" font-weight="700">23.14</text>
+<text x="50" y="298" fill="#152b47">SGD + positive t</text><rect x="450" y="260" width="392" height="60" rx="6" fill="#94a3b8"/><text x="856" y="300" fill="#152b47" font-weight="700">23.80</text>
+<text x="50" y="398" fill="#152b47">SGHMC + 3DGS</text><rect x="450" y="360" width="549" height="60" rx="6" fill="#94a3b8"/><text x="1013" y="400" fill="#152b47" font-weight="700">24.52</text>
+<text x="50" y="498" fill="#152b47">SGHMC + positive t</text><rect x="450" y="460" width="552" height="60" rx="6" fill="#94a3b8"/><text x="1016" y="500" fill="#152b47" font-weight="700">24.53</text>
+<text x="50" y="598" fill="#152b47">Full SSS (adds negative)</text><rect x="450" y="560" width="626" height="60" rx="6" fill="#2563eb"/><text x="1090" y="600" fill="#152b47" font-weight="700">24.87</text>
+<text x="640" y="692" text-anchor="middle" fill="#152b47">Source: Table 20 (supplement). EyeCode redraw.</text>
+</svg>
