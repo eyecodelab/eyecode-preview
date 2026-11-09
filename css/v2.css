@@ -881,18 +881,21 @@ body.v2-legacy :where(p,h1,h2,h3,h4,h5,h6,a,li,span,label,button,input,select,te
 @media(max-width:720px){:root{--v2-card-gap-compact:14px}}
 /* Shared listing width for Knowledge / Skills / Demos */
 :is(.v2-skills-page,.v2-explore-page:has(.v2-article-listing)) :is(.v2-page-hero,.v2-library),.v2-demos-listing :is(.v2-page-hero,.v2-library){width:min(var(--v2-listing-max),calc(100% - var(--v2-page-gutter) - var(--v2-page-gutter)))}
-/* Knowledge + Skills listing cards */
+/* Knowledge + Skills listing cards: same geometry as AI Demos cards (16:9 media, 14/16px body, pill meta row) */
 .v2-explore-page{--explore-card-padding:var(--v2-card-pad-compact)}
 .v2-explore-page .v2-article-grid{gap:var(--v2-card-gap-compact)}
-.v2-explore-page .v2-art-cover{aspect-ratio:2/1}
+.v2-explore-page .v2-art-cover{aspect-ratio:16/9}
 .v2-explore-page .v2-cover-topic{display:none}
-.v2-explore-page .v2-article-card-body{gap:0;padding:14px var(--v2-card-pad-compact) var(--v2-card-pad-compact)}
-.v2-explore-page .v2-article-card .v2-tag{margin:0 0 6px;font-size:12px;line-height:1.3}
-.v2-explore-page .v2-article-card .v2-content-status{margin:0 0 6px;padding:2px 8px;font-size:11.5px;line-height:1.3;border-radius:999px}
-.v2-explore-page .v2-article-card-body>.v2-article-date{margin-bottom:6px;font-size:13px}
+.v2-explore-page .v2-article-card-body{gap:7px;padding:14px var(--v2-card-pad-compact) var(--v2-card-pad-compact)}
+.v2-card-meta{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%}
+.v2-card-meta>*{margin:0!important;font-size:11.5px;line-height:1.2;letter-spacing:.02em;font-weight:550}
+.v2-card-meta>:is(.v2-tag,.v2-content-status){padding:3px 8px;border:1px solid var(--v2-line);border-radius:999px;background:transparent;color:var(--v2-muted)}
+.v2-card-meta>.v2-tag:first-child{color:var(--v2-blue);border-color:transparent;background:var(--v2-blue-light)}
+.v2-card-meta>.v2-article-date{margin-left:auto!important;font-weight:450;color:var(--v2-muted);white-space:nowrap}
 .v2-explore-page .v2-article-card h3{font-size:1.0625rem;line-height:1.3;margin:0}
-.v2-explore-page .v2-article-card p{margin:6px 0 12px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.v2-explore-page .v2-article-card .v2-card-link{font-size:14px}
+.v2-explore-page .v2-article-card p{margin:0;font-size:15px;line-height:1.5}
+.v2-explore-page .v2-article-card .v2-card-link{margin-top:auto;padding-top:2px;font-size:14px}
+@media(max-width:720px){.v2-explore-page .v2-article-card-body{padding:14px}}
 /* Homepage cards */
 .v2-home-page :is(.v2-category-grid,.v2-skills-grid){gap:var(--v2-card-gap-compact)}
 .v2-home-page .v2-category-card{padding:var(--v2-card-pad-compact) 18px}
