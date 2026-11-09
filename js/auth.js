@@ -48,7 +48,7 @@
     }
     // The database objects from supabase/migrations are missing: PostgREST answers 404 / PGRST205 / 42P01.
     function isSetupError(e, json) { var code = json && json.code || ''; return e.status === 404 || /^(?:PGRST20[0-9]|42P01)$/.test(code) || /schema cache|does not exist/i.test(e.message || ''); }
-    window.EyeCodeAuth = { hintFor: hintFor, isSetupError: isSetupError, buildTree: buildTree, b64url: b64url, errorMessage: errorMessage, enabled: enabled, devPreview: !!dev, environment: env };
+    window.EyeCodeAuth = { api: function (p, o) { return api(p, o); }, state: state, el: el, tx: tx, avatar: avatar, lang: lang, signIn: function () { return signIn(); }, signOut: function () { return signOut(); }, freshSession: function () { return freshSession(); }, ready: false, setProfile: function (patch) { if (state.profile) { Object.keys(patch).forEach(function (k) { state.profile[k] = patch[k]; }); renderHeader(); } }, hintFor: hintFor, isSetupError: isSetupError, buildTree: buildTree, b64url: b64url, errorMessage: errorMessage, enabled: enabled, devPreview: !!dev, environment: env };
     if (!enabled && !dev) return;
 
     // ---- session ----
@@ -150,7 +150,7 @@
     }
     function loadProfile() {
         if (!state.session) { state.profile = null; return Promise.resolve(); }
-        return api('/rest/v1/profiles?id=eq.' + encodeURIComponent(state.session.user.id) + '&select=display_name,avatar_url,role,plan,status').then(function (rows) { state.profile = rows && rows[0] || { display_name: '', avatar_url: null, role: 'user', plan: 'free', status: 'active', missing: true }; }).catch(function () { state.profile = { display_name: '', avatar_url: null, role: 'user', plan: 'free', status: 'active', missing: true }; });
+        return api('/rest/v1/profiles?id=eq.' + encodeURIComponent(state.session.user.id) + '&select=display_name,avatar_url,role,status').then(function (rows) { state.profile = rows && rows[0] || { display_name: '', avatar_url: null, role: 'user', status: 'active', missing: true }; }).catch(function () { state.profile = { display_name: '', avatar_url: null, role: 'user', status: 'active', missing: true }; });
     }
 
     // ---- header ----
@@ -166,11 +166,20 @@
                 var b = el('button', { type: 'button', class: 'v2-auth-signin' }, [tx('Đăng nhập', 'Sign in')]); b.addEventListener('click', signIn); root.appendChild(b); return;
             }
             var name = state.profile.display_name || (lang() === 'en' ? 'Account' : 'Tài khoản');
+            var panelId = 'v2-auth-panel-' + Math.random().toString(36).slice(2, 8);
             var out = el('button', { type: 'button', class: 'v2-auth-signout' }, [tx('Đăng xuất', 'Sign out')]); out.addEventListener('click', signOut);
-            var menu = el('details', { class: 'v2-auth-menu' }, [
-                el('summary', { class: 'v2-auth-summary', 'aria-label': name }, [avatar(state.profile.avatar_url, name, 'v2-avatar'), el('span', { class: 'v2-auth-name', text: name })]),
-                el('div', { class: 'v2-auth-panel' }, [el('p', { class: 'v2-auth-meta' }, [el('strong', { text: name }), state.profile.role === 'admin' ? tx('Quản trị viên', 'Admin', 'em') : null, state.profile.missing ? tx('Hồ sơ chưa sẵn sàng (cần áp dụng migration).', 'Profile not ready (migration required).', 'em') : null]), out])
+            var trigger = el('button', { type: 'button', class: 'v2-auth-trigger', 'aria-haspopup': 'true', 'aria-expanded': 'false', 'aria-controls': panelId, 'aria-label': (lang() === 'en' ? 'Account menu: ' : 'Menu tài khoản: ') + name, title: name }, [avatar(state.profile.avatar_url, name, 'v2-avatar v2-avatar-header')]);
+            var panel = el('div', { class: 'v2-auth-panel', id: panelId, hidden: 'hidden' }, [
+                el('p', { class: 'v2-auth-meta' }, [el('strong', { text: name }), state.profile.role === 'admin' ? tx('Quản trị viên', 'Admin', 'em') : null, state.profile.missing ? tx('Hồ sơ chưa sẵn sàng (cần áp dụng migration).', 'Profile not ready (migration required).', 'em') : null]),
+                el('a', { class: 'v2-auth-link', href: 'profile.html' }, [tx('Hồ sơ của bạn', 'Your profile')]),
+                out
             ]);
+            var menu = el('div', { class: 'v2-auth-menu' }, [trigger, panel]);
+            function setOpen(open, focusTrigger) { panel.hidden = !open; trigger.setAttribute('aria-expanded', String(open)); if (!open && focusTrigger) trigger.focus(); }
+            trigger.addEventListener('click', function () { setOpen(panel.hidden); });
+            menu.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !panel.hidden) { ev.stopPropagation(); setOpen(false, true); } });
+            menu.addEventListener('focusout', function (ev) { if (!panel.hidden && ev.relatedTarget && !menu.contains(ev.relatedTarget)) setOpen(false); });
+            document.addEventListener('click', function outside(ev) { if (!menu.isConnected) { document.removeEventListener('click', outside); return; } if (!menu.contains(ev.target)) setOpen(false); });
             root.appendChild(menu);
         });
     }
@@ -256,10 +265,10 @@
         root.appendChild(list);
         load();
     }
-    function renderAll() { renderHeader(); document.querySelectorAll('[data-comments]').forEach(renderComments); }
+    function renderAll() { renderHeader(); document.querySelectorAll('[data-comments]').forEach(renderComments); window.EyeCodeAuth.ready = true; document.dispatchEvent(new Event('eyecode-auth-change')); }
 
     window.EyeCodeAuth.refresh = function () { state.session = loadSession(); return freshSession().then(loadProfile).then(renderAll); };
     state.session = loadSession();
     completeSignIn().then(freshSession).then(loadProfile).then(renderAll);
-    document.addEventListener('v2-language-change', function () { document.querySelectorAll('[data-comments] textarea[data-placeholder-vi]').forEach(function (t) { t.placeholder = lang() === 'en' ? t.dataset.placeholderEn : t.dataset.placeholderVi; }); });
+    document.addEventListener('v2-language-change', function () { if (state.session && state.profile) renderHeader(); document.querySelectorAll('[data-comments] textarea[data-placeholder-vi]').forEach(function (t) { t.placeholder = lang() === 'en' ? t.dataset.placeholderEn : t.dataset.placeholderVi; }); });
 }());
