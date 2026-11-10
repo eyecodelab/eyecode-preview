@@ -203,6 +203,7 @@
     function setLevel(level) {
         if (!levels.includes(level)) level = 'basic';
         document.querySelectorAll('[data-depth]').forEach(el => { el.hidden = el.dataset.depth !== level; });
+        document.querySelectorAll('[data-reading-levels]').forEach(el => { el.hidden = !el.dataset.readingLevels.split(/\s+/).includes(level); });
         document.querySelectorAll('[data-level]').forEach(el => el.setAttribute('aria-pressed', String(el.dataset.level === level)));
         savePreference('eyecode_explanation_level', level);
     }
