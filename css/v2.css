@@ -122,7 +122,7 @@ body.v2-page{margin:0;background:var(--v2-bg);color:var(--v2-ink);-webkit-font-s
 .v2-header{position:sticky;top:0;z-index:11000;background:var(--v2-header-bg);border-bottom:1px solid var(--v2-line);color:var(--v2-ink);backdrop-filter:blur(12px)}
 .v2-header-inner{height:var(--v2-header-height);width:min(var(--v2-content-max),calc(100% - var(--v2-page-gutter) - var(--v2-page-gutter)));margin-inline:auto;display:flex;align-items:center;justify-content:space-between;gap:30px}
 .v2-brand{display:flex;align-items:center;flex-shrink:0}
-.v2-brand .v2-brand-logo{display:block;width:76px;height:auto;object-fit:contain}
+.v2-brand .v2-brand-logo{display:block;width:72px;height:auto;object-fit:contain}
 .v2-nav{display:flex;align-items:center;gap:27px}
 .v2-nav>a{white-space:nowrap;padding:30px 0}
 .v2-nav>a:hover,.v2-nav>a[aria-current],.v2-current{color:var(--v2-blue)}
