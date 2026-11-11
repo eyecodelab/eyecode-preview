@@ -1,7 +1,16 @@
 (function () {
     'use strict';
+    let teardown = () => {};
+    function mount() {
+    teardown();
     const layout = document.querySelector('.v2-article-layout');
     if (!layout) return;
+    let disposed = false;
+    const listeners = [];
+    const on = (target, type, handler, options) => {
+        target.addEventListener(type, handler, options);
+        listeners.push(() => target.removeEventListener(type, handler, options));
+    };
     document.documentElement.classList.add('v2-reading-ready');
     const article = layout.querySelector('.v2-article-content');
     const toolbar = document.querySelector('.v2-article-tools');
@@ -23,6 +32,7 @@
 
     const readingOffset = () => header.getBoundingClientRect().height + toolbar.getBoundingClientRect().height + 20;
     function revealCurrentTopic() {
+        if (disposed) return;
         if (panels.topic.hidden) return;
         const current = panels.topic.querySelector('a[aria-current="page"]');
         if (!current || !current.getClientRects().length) return;
@@ -32,6 +42,7 @@
         else if (item.top < bounds.top + 12) panels.topic.scrollTop -= bounds.top + 12 - item.top;
     }
     function syncPanels() {
+        if (disposed) return;
         for (const name of Object.keys(panels)) {
             const open = desktop.matches ? desktopOpen[name] : compactOpen === name;
             panels[name].hidden = !open;
@@ -54,7 +65,7 @@
         if (restoreFocus) toggles[name].focus({preventScroll: true});
     }
     for (const [name, button] of Object.entries(toggles)) {
-        button.addEventListener('click', () => {
+        on(button, 'click', () => {
             if (desktop.matches) desktopOpen[name] = !desktopOpen[name];
             else compactOpen = compactOpen === name ? null : name;
             syncPanels();
@@ -65,21 +76,21 @@
                 if (name === 'topic') revealCurrentTopic();
             }
         });
-        panels[name].querySelector('[data-reading-close]').addEventListener('click', () => closeCompact(true));
+        on(panels[name].querySelector('[data-reading-close]'), 'click', () => closeCompact(true));
     }
-    backdrop.addEventListener('click', () => closeCompact(true));
-    document.addEventListener('keydown', event => {
+    on(backdrop, 'click', () => closeCompact(true));
+    on(document, 'keydown', event => {
         if (event.key === 'Escape' && compactOpen) { event.preventDefault(); closeCompact(true); }
     });
     // Compact panels are non-modal: the toolbar/header remain available, and moving
     // keyboard focus outside closes the panel instead of trapping the reader.
-    document.addEventListener('focusin', event => {
+    on(document, 'focusin', event => {
         if (compactOpen && !panels[compactOpen].contains(event.target) && !toolbar.contains(event.target)) closeCompact(false);
     });
-    document.addEventListener('click', event => {
+    on(document, 'click', event => {
         if (compactOpen && !panels[compactOpen].contains(event.target) && !toolbar.contains(event.target)) closeCompact(false);
     });
-    desktop.addEventListener('change', () => {
+    on(desktop, 'change', () => {
         const focusedPanel = Object.keys(panels).find(name => panels[name].contains(document.activeElement));
         compactOpen = null;
         syncPanels();
@@ -99,6 +110,7 @@
         return id;
     }
     function refreshOutline() {
+        if (disposed) return;
         const all = Array.from(article.querySelectorAll('h2, h3'));
         all.forEach(uniqueHeadingId);
         headings = all.filter(heading => !heading.closest('[hidden]') && heading.getClientRects().length).map(heading => {
@@ -164,6 +176,7 @@
         });
     }
     function scheduleActive() {
+        if (disposed) return;
         if (!frame) frame = window.requestAnimationFrame(updateActive);
     }
     function goToHeading(target, smooth, focus) {
@@ -178,7 +191,7 @@
         }
         window.scrollTo({top: Math.max(0, heading.getBoundingClientRect().top + window.scrollY - readingOffset()), behavior: smooth && !reducedMotion.matches ? 'smooth' : 'instant'});
     }
-    outline.addEventListener('click', event => {
+    on(outline, 'click', event => {
         const link = event.target.closest('a');
         if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
         const target = document.getElementById(decodeURIComponent(link.hash.slice(1)));
@@ -188,6 +201,7 @@
         goToHeading(target, true, true);
     });
     function alignHash() {
+        if (disposed) return;
         let id;
         try { id = decodeURIComponent(location.hash.slice(1)); } catch (_) { return; }
         const target = id && document.getElementById(id);
@@ -200,17 +214,33 @@
     });
     observer.observe(article, {subtree: true, childList: true, characterData: true, attributes: true, attributeFilter: ['hidden']});
     const sizeObserver = new ResizeObserver(() => {
+        if (disposed) return;
         document.body.style.setProperty('--v2-article-toolbar-height', toolbar.getBoundingClientRect().height + 'px');
         scheduleActive();
     });
     sizeObserver.observe(toolbar);
     sizeObserver.observe(article);
-    window.addEventListener('scroll', scheduleActive, {passive: true});
-    window.addEventListener('resize', scheduleActive);
-    window.addEventListener('hashchange', alignHash);
-    window.addEventListener('load', alignHash);
+    on(window, 'scroll', scheduleActive, {passive: true});
+    on(window, 'resize', scheduleActive);
+    on(window, 'hashchange', alignHash);
+    on(window, 'load', alignHash);
+    teardown = () => {
+        disposed = true;
+        observer.disconnect();
+        sizeObserver.disconnect();
+        listeners.splice(0).forEach(remove => remove());
+        window.cancelAnimationFrame(frame);
+        window.cancelAnimationFrame(outlineFrame);
+        headings = [];
+        document.documentElement.classList.remove('v2-reading-ready');
+        document.body.classList.remove('v2-reading-panel-open');
+        document.body.style.removeProperty('--v2-article-toolbar-height');
+    };
     syncPanels();
     refreshOutline();
     if (document.fonts) document.fonts.ready.then(revealCurrentTopic);
     if (document.readyState === 'complete') alignHash();
+    }
+    window.EyeCodeArticleNavigation = Object.freeze({mount, dispose() { teardown(); teardown = () => {}; }});
+    mount();
 }());

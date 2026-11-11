@@ -153,7 +153,7 @@
         const initial = buttons.find(b => b.getAttribute('aria-pressed') === 'true');
         const anchorFilter = root.hasAttribute('data-tutorial-library') ? buttons.find(button => button.id && '#'+button.id === location.hash)?.dataset.filter : '';
         let filter = params.has('category') ? params.get('category') : (anchorFilter || (initial ? initial.dataset.filter : ''));
-        if (!buttons.some(b => b.dataset.filter === filter)) filter = '';
+        if (!buttons.some(b => b.dataset.filter === filter && !b.hidden)) filter = '';
         let market = params.get('market') || '';
         if (!marketButtons.some(button => button.dataset.marketFilter === market)) market = '';
         if (input) input.value = params.get('q') || '';
@@ -168,13 +168,13 @@
                 card.hidden = !visible;
                 if (visible) { visibleCount++; if (!card.hasAttribute('data-listing-navigation')) count++; }
             });
-            root.querySelectorAll('[data-filter-panel]').forEach(panel => { panel.hidden = panel.dataset.filterPanel !== filter; });
+            root.querySelectorAll('[data-filter-panel]').forEach(panel => { panel.hidden = panel.dataset.filterPanel !== filter || (panel.hasAttribute('data-atlas-panel') && !root.querySelector('[data-atlas-entry]')?.dataset.atlasAuthorized); });
             buttons.forEach(b => b.setAttribute('aria-pressed', String(b.dataset.filter === filter)));
             marketButtons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.marketFilter === market)));
             const countElement = root.querySelector('[data-result-count]');
             if (countElement) countElement.textContent = count + ' ' + (countElement.dataset[currentLanguage === 'en' ? 'countEn' : 'countVi'] || 'kết quả');
             const empty = root.querySelector('[data-empty]');
-            if (empty) empty.hidden = visibleCount !== 0;
+            if (empty) empty.hidden = visibleCount !== 0 || (filter === 'atlas' && Boolean(root.querySelector('[data-atlas-entry]')?.dataset.atlasAuthorized));
             if (writeUrl) {
                 const url = new URL(location.href);
                 if (filter) url.searchParams.set('category', filter); else url.searchParams.delete('category');

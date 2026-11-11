@@ -133,14 +133,31 @@
                 notice('Không thể hoàn tất đăng nhập.', 'Could not complete sign-in.', e.message, hintFor({ error: '', code: '', description: e.message }));
             });
     }
+    function oauthRedirectTo() {
+        var origin = new URL(location.origin);
+        var local = /^(?:http:|https:)$/.test(origin.protocol) && /^(?:localhost|127\.0\.0\.1)$/.test(origin.hostname);
+        var hosted = /^https:\/\/(?:preview\.)?eyecodetech\.com$/.test(origin.origin);
+        if (!local && !hosted) throw new Error('Untrusted OAuth origin');
+        // Build from the browser origin, never a query parameter, canonical URL or Site URL.
+        var back = new URL(origin.origin);
+        back.pathname = location.pathname;
+        var current = new URL(location.href);
+        back.search = current.search;
+        back.hash = current.hash;
+        ['code', 'error', 'error_code', 'error_description'].forEach(function (key) { back.searchParams.delete(key); });
+        return back.href;
+    }
     function signIn() {
         if (dev) { dev.set('user'); return; }
+        var redirectTo;
+        try { redirectTo = oauthRedirectTo(); }
+        catch (_) { notice('Không thể đăng nhập từ địa chỉ này.', 'Sign-in is not available from this address.'); return; }
         var verifier = randomVerifier();
         if (!store(function (ls) { ls.setItem(PKCE_KEY, verifier); return true; })) { notice('Trình duyệt chặn lưu trữ cục bộ, không thể đăng nhập.', 'The browser blocks local storage, so sign-in cannot work.'); return; }
-        challengeFor(verifier).then(function (challenge) {
-            // Same origin and path as the current page, no query string (redirect allow-lists match origin + path).
-            var back = location.origin + location.pathname;
-            location.href = base + '/auth/v1/authorize?' + new URLSearchParams({ provider: 'google', redirect_to: back, code_challenge: challenge, code_challenge_method: 's256' });
+        return challengeFor(verifier).then(function (challenge) {
+            // redirect_to is the REST equivalent of signInWithOAuth({options:{redirectTo}}).
+            // Supabase must allow this origin/path (and query/hash); otherwise its Site URL may be used.
+            location.href = base + '/auth/v1/authorize?' + new URLSearchParams({ provider: 'google', redirect_to: redirectTo, code_challenge: challenge, code_challenge_method: 's256' });
         });
     }
     function signOut() {
