@@ -1,3 +1,4 @@
+import {mountAtlasVisuals} from './atlas-visuals.js';
 import {createAdminAuthorization,loadAtlas,isLocalAtlasOrigin} from './atlas-repository.js';
 import {renderAtlas,sourceNotice,escape} from './atlas-view.js';
 import {atlasUrl} from './atlas-data.js';
@@ -6,7 +7,7 @@ if(mount){
  const access=createAdminAuthorization();
  let generation=0,loading=false,disposed=false,cache=null,pending=null,checking=null,readerScript=null,expiryTimer;
  let displayedRoute='',hidden=false;
- let scrollFrame=0;
+ let scrollFrame=0,disposeVisuals=()=>{};
  const saveScroll=()=>history.replaceState({...history.state,atlasScroll:[scrollX,scrollY]},'',location.href);
  saveScroll();
  const previousRestoration=history.scrollRestoration;
@@ -18,6 +19,7 @@ if(mount){
  const sessionKey=()=>{const s=auth()?.state?.session;return s?.user?.id&&s?.access_token?{id:s.user.id,token:s.access_token}:null;};
  const sameSession=(a,b)=>a&&b&&a.id===b.id&&a.token===b.token;
  function clearView(){
+  disposeVisuals();disposeVisuals=()=>{};
   window.EyeCodeArticleNavigation?.dispose();
   // Scrub nodes that might briefly be retained by pending reader/observer callbacks.
   for(const node of mount.querySelectorAll('*')){node.replaceChildren();for(const attr of [...node.attributes])node.removeAttribute(attr.name);}
@@ -59,6 +61,7 @@ if(mount){
   if(ticket!==generation||disposed||!access.getState().authorized)return;
   syncLanguage();clearView();
   mount.innerHTML=sourceNotice(data)+renderAtlas(data,new URLSearchParams(location.search));
+  disposeVisuals=mountAtlasVisuals(mount,{onAccessDenied:()=>void recheck()});
   displayedRoute=location.pathname+location.search;
   if(mount.querySelector('.v2-article-layout')){
    document.documentElement.classList.add('v2-article-document');document.body.classList.add('v2-article-page');

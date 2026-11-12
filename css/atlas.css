@@ -96,3 +96,35 @@
 @media(prefers-reduced-motion:reduce){[data-sequence-guide] :is(.atlas-key-button,.atlas-variant-card){transition:none}}
 [data-sequence-guide] .atlas-key-row:not([data-expanded]) .atlas-key-button{grid-column:1/-1}
 [data-sequence-guide] .atlas-key-row:not([data-expanded]) .atlas-key-meta{flex-direction:row;gap:8px;flex-wrap:wrap}
+
+/* Independent milestones have no empty variant column. */
+[data-sequence-guide] .atlas-key-row[data-no-variants] .atlas-key-button{grid-column:1/-1}
+/* Optional private visual explanations inside the existing Quick View. */
+.atlas-visual{min-width:0;margin:16px 0;padding:14px 0;border-top:1px solid var(--v2-line);border-bottom:1px solid var(--v2-line)}
+.atlas-quick-view .atlas-visual h3{font-size:15px;line-height:1.4;margin:0 0 6px}
+.atlas-visual .atlas-visual-title{font-size:13px;font-weight:600;margin:0 0 10px}
+.atlas-visual-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.atlas-visual-tabs button{padding:8px 10px;border:1px solid var(--v2-line);border-radius:6px;background:var(--v2-surface);color:var(--v2-ink);font:inherit;font-size:12px;cursor:pointer}
+.atlas-visual-tabs button[aria-selected=true]{border-color:var(--v2-blue);background:var(--v2-blue-light);font-weight:600}
+.atlas-visual [role=tabpanel][hidden]{display:none}
+.atlas-visual [role=tabpanel]:focus-visible,.atlas-visual-tabs button:focus-visible{outline:2px solid var(--v2-focus);outline-offset:3px}
+.atlas-visual-figure{margin:8px 0 10px}
+.atlas-visual-diagram{display:block;width:100%;height:auto;max-height:330px}
+.atlas-visual-mobile{display:none}
+.atlas-visual-diagram rect{fill:var(--v2-surface);stroke:var(--v2-line);stroke-width:1.2}
+.atlas-visual-diagram [data-node-role=memory] rect{fill:var(--v2-blue-light);stroke:var(--v2-blue)}
+.atlas-visual-diagram [data-node-role=output] rect{stroke:var(--v2-blue)}
+.atlas-visual-diagram text{fill:var(--v2-ink);font-family:inherit;font-size:13px}
+.atlas-visual-edges path{stroke:var(--v2-muted);stroke-width:1.3;fill:none}
+.atlas-visual-diagram marker path{fill:var(--v2-muted)}
+html[lang=en] .atlas-visual [data-visual-lang=vi],html:not([lang=en]) .atlas-visual [data-visual-lang=en]{display:none}
+.atlas-visual .atlas-visual-io p,.atlas-visual .atlas-visual-caption,.atlas-visual .atlas-visual-source,.atlas-visual .atlas-visual-figure figcaption{font-size:12px;line-height:1.6;margin:6px 0;color:var(--v2-muted)}
+.atlas-visual-io strong{font-weight:600;color:var(--v2-ink);margin-right:5px}
+.atlas-visual-source{overflow-wrap:anywhere}
+.atlas-private-image{min-width:0}
+.atlas-private-image img{display:block;width:100%;max-height:380px;object-fit:contain;background:white;border:1px solid var(--v2-line);border-radius:6px}
+.atlas-private-image img[hidden]{display:none}
+.atlas-visual-video{width:100%;aspect-ratio:16/9;min-height:200px}
+.atlas-visual-video:empty{display:none}
+.atlas-visual-video iframe{display:block;width:100%;height:100%;border:1px solid var(--v2-line);border-radius:6px}
+@media(max-width:600px){.atlas-visual-desktop{display:none}.atlas-visual-mobile{display:block;max-height:none}.atlas-visual{padding:12px 0}}
