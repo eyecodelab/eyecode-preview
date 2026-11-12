@@ -39,11 +39,26 @@ export function renderVisualExplanation(visual,modelId){
  const simplified=diagramSVG(visual.diagram,visual.title,'desktop',modelId)+diagramSVG(visual.diagram,visual.title,'mobile',modelId);
  const original=visual.original?.verified&&safe(visual.original.url)&&visual.original.usage&&visual.original.rights?visual.original:null;
  const video=visual.video?.verified&&safe(visual.video.url)&&safe(visual.video.evidence)?visual.video:null;
- const options=[...(simplified?[{id:'simplified',title:pair('Sơ đồ đơn giản','Simplified Figure')}]:[]),...(original?[{id:'original',title:pair('Hình gốc','Original Figure')}]:[]),...(video?[{id:'video',title:pair('Video demo','Video Demo')}]:[])];
+ const compact=visual.presentation==='compact';
+ const embedded=original&&staticAsset(original)&&original.credit&&safe(original.rightsUrl)&&['scholarly-figure-permission','CC-BY-4.0'].includes(original.rights);
+ const options=[...(simplified?[{id:'simplified',title:pair('Sơ đồ đơn giản','Simplified Figure')}]:[]),...((compact?embedded:original)?[{id:'original',title:pair('Hình gốc','Original Figure')}]:[]),...(video?[{id:'video',title:pair('Video demo','Video Demo')}]:[])];
  if(!options.length)return '';
- const io=`<div class="atlas-visual-io">${[['input','Đầu vào','Input'],['mechanism','Cơ chế chính','Core Mechanism'],['output','Đầu ra','Output']].map(([key,vi,en])=>`<p><strong>${bi(pair(vi,en))}</strong> ${bi(visual[key])}</p>`).join('')}${visual.novelty?`<p data-visual-novelty><strong>${bi(pair('Điểm mới · viền xanh','Novelty · blue outline'))}</strong> ${bi(visual.novelty)}</p>`:''}</div>`;
+ const io=`<div class="atlas-visual-io">${[['input','Đầu vào','Input'],['mechanism','Cơ chế chính','Core Mechanism'],['output','Đầu ra','Output']].map(([key,vi,en])=>`<p><strong>${bi(pair(vi,en))}</strong> ${bi(visual[key])}</p>`).join('')}${visual.novelty?`<p data-visual-novelty><strong>${bi(compact?pair('Điểm mới','Novelty'):pair('Điểm mới · viền xanh','Novelty · blue outline'))}</strong> ${bi(visual.novelty)}</p>`:''}</div>`;
  const caption=`<p class="atlas-visual-caption">${bi(visual.caption)}</p>`;
  const source=`<p class="atlas-visual-source">${bi(pair('Nguồn','Source'))}: ${external(visual.source.url,visual.source.title)}</p>`;
+ if(compact){
+  const paper=external(visual.source.paperURL||visual.source.url,pair('Bài gốc','Original Paper'));
+  const originalLink=original&&!embedded?external(original.url,pair(`Xem hình gốc (Hình ${original.figure})`,`View Original Figure (Fig. ${original.figure})`)):'';
+  const sourceLine=`<p class="atlas-visual-source">${paper}${originalLink?' · '+originalLink:''}</p>`;
+  const credit=embedded?`<p class="atlas-visual-source" data-visual-credit>${external(original.url,original.credit)}${/^CC-BY-4\.0$/.test(original.rights)&&safe(original.rightsUrl)?' · '+external(original.rightsUrl,'CC BY 4.0'):''}</p>`:'';
+  return `<section class="atlas-visual" data-atlas-visual="${modelId}" aria-labelledby="visual-heading-${modelId}"><h3 id="visual-heading-${modelId}">${bi(visual.title)}</h3><div class="atlas-visual-tabs" role="tablist" aria-labelledby="visual-heading-${modelId}">${options.map((o,i)=>`<button type="button" role="tab" id="visual-tab-${modelId}-${o.id}" data-visual-tab="${o.id}" aria-selected="${i===0}" aria-controls="visual-panel-${modelId}-${o.id}" tabindex="${i===0?0:-1}">${bi(o.title)}</button>`).join('')}</div>${options.map((o,i)=>{
+   let content;
+   if(o.id==='simplified')content=`<figure class="atlas-visual-figure">${simplified}</figure>${io}${sourceLine}`;
+   else if(o.id==='original')content=`<div class="atlas-private-image" data-atlas-image="${esc(staticAsset(original))}"><p data-visual-loading>${bi(pair('Đang tải hình…','Loading figure…'))}</p><img loading="lazy" decoding="async" hidden alt="${esc(text(visual.title,lang()))}" data-alt-vi="${esc(text(visual.title,'vi'))}" data-alt-en="${esc(text(visual.title,'en'))}"></div>${io}${credit}`;
+   else {const embed=allowedVideoEmbed(video);content=`${embed?`<div class="atlas-visual-video" data-video-embed="${esc(embed)}" data-video-title-vi="${esc(text(video.title,'vi'))}" data-video-title-en="${esc(text(video.title,'en'))}"></div>`:external(video.url,video.title)}${io}<p class="atlas-visual-source">${external(video.url,video.title)}</p>`;}
+   return `<div role="tabpanel" id="visual-panel-${modelId}-${o.id}" aria-labelledby="visual-tab-${modelId}-${o.id}" tabindex="0" ${i===0?'':'hidden'}>${content}</div>`;
+  }).join('')}</section>`;
+ }
  return `<section class="atlas-visual" data-atlas-visual="${modelId}" aria-labelledby="visual-heading-${modelId}"><h3 id="visual-heading-${modelId}">${bi(pair('Giải thích trực quan','Visual Explanation'))}</h3><p class="atlas-visual-title">${bi(visual.title)}</p><div class="atlas-visual-tabs" role="tablist" aria-labelledby="visual-heading-${modelId}">${options.map((o,i)=>`<button type="button" role="tab" id="visual-tab-${modelId}-${o.id}" data-visual-tab="${o.id}" aria-selected="${i===0}" aria-controls="visual-panel-${modelId}-${o.id}" tabindex="${i===0?0:-1}">${bi(o.title)}</button>`).join('')}</div>${options.map((o,i)=>{
   let content;
   if(o.id==='simplified')content=`<figure class="atlas-visual-figure">${simplified}<figcaption>${bi(pair('Minh họa giáo dục do EyeCode biên soạn','EyeCode educational illustration'))}</figcaption></figure>${io}${caption}${source}`;
