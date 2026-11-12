@@ -13,6 +13,7 @@
     // Local development preview (a development-only module that local builds add): only with empty config on localhost.
     var dev = !enabled && window.EYECODE_DEV_PREVIEW && /^(?:localhost|127\.0\.0\.1)$/.test(location.hostname) ? window.EYECODE_DEV_PREVIEW : null;
     var state = { session: null, profile: null };
+    var profileRequest = null, sessionRefresh = null, adminExpiryTimer;
 
     var lang = function () { return document.documentElement.lang === 'en' ? 'en' : 'vi'; };
     function el(tag, attrs, kids) {
@@ -48,7 +49,7 @@
     }
     // The database objects from supabase/migrations are missing: PostgREST answers 404 / PGRST205 / 42P01.
     function isSetupError(e, json) { var code = json && json.code || ''; return e.status === 404 || /^(?:PGRST20[0-9]|42P01)$/.test(code) || /schema cache|does not exist/i.test(e.message || ''); }
-    window.EyeCodeAuth = { api: function (p, o) { return api(p, o); }, state: state, el: el, tx: tx, avatar: avatar, lang: lang, signIn: function () { return signIn(); }, signOut: function () { return signOut(); }, freshSession: function () { return freshSession(); }, ready: false, setProfile: function (patch) { if (state.profile) { Object.keys(patch).forEach(function (k) { state.profile[k] = patch[k]; }); renderHeader(); } }, hintFor: hintFor, isSetupError: isSetupError, buildTree: buildTree, b64url: b64url, errorMessage: errorMessage, enabled: enabled, devPreview: !!dev, environment: env };
+    window.EyeCodeAuth = { api: function (p, o) { return api(p, o); }, state: state, el: el, tx: tx, avatar: avatar, lang: lang, signIn: function () { return signIn(); }, signOut: function () { return signOut(); }, freshSession: function () { return freshSession(); }, ready: false, canShowAdmin: canShowAdmin, setProfile: function (patch) { if (state.profile) { var changed = Object.keys(patch).some(function (k) { return state.profile[k] !== patch[k]; }); Object.assign(state.profile, patch); renderHeader(); if (changed) document.dispatchEvent(new Event('eyecode-profile-change')); } }, hintFor: hintFor, isSetupError: isSetupError, buildTree: buildTree, b64url: b64url, errorMessage: errorMessage, enabled: enabled, devPreview: !!dev, environment: env };
     if (!enabled && !dev) return;
 
     // ---- session ----
@@ -73,9 +74,14 @@
     function freshSession() {
         var s = state.session; if (!s) return Promise.resolve(null);
         if (s.expires_at - 60 > Date.now() / 1000) return Promise.resolve(s);
-        return api('/auth/v1/token?grant_type=refresh_token', { method: 'POST', token: null, body: { refresh_token: s.refresh_token } })
-            .then(function (j) { saveSession(toSession(j)); return state.session; })
-            .catch(function () { saveSession(null); state.profile = null; return null; });
+        if (sessionRefresh && sessionRefresh.session === s) return sessionRefresh.promise;
+        var job = { session: s };
+        job.promise = api('/auth/v1/token?grant_type=refresh_token', { method: 'POST', token: null, body: { refresh_token: s.refresh_token } })
+            .then(function (j) { if (state.session === s) saveSession(toSession(j)); return state.session; })
+            .catch(function () { if (state.session === s) { saveSession(null); state.profile = null; renderAll(); } return state.session; })
+            .finally(function () { if (sessionRefresh === job) sessionRefresh = null; });
+        sessionRefresh = job;
+        return job.promise;
     }
     // ---- sign-in result: the callback may carry `?code=` (success) or `error=...` (query or hash) ----
     function readRedirectError() {
@@ -163,11 +169,47 @@
     function signOut() {
         if (dev) { dev.set('visitor'); return; }
         var s = state.session;
-        (s ? api('/auth/v1/logout', { method: 'POST' }).catch(function () { }) : Promise.resolve()).then(function () { saveSession(null); state.profile = null; renderAll(); });
+        // Hide private navigation and purge Atlas immediately, even if logout is slow/offline.
+        saveSession(null); state.profile = null; renderAll();
+        return s ? api('/auth/v1/logout', { method: 'POST', token: s.access_token }).catch(function () { }) : Promise.resolve();
     }
     function loadProfile() {
-        if (!state.session) { state.profile = null; return Promise.resolve(); }
-        return api('/rest/v1/profiles?id=eq.' + encodeURIComponent(state.session.user.id) + '&select=display_name,avatar_url,role,status').then(function (rows) { state.profile = rows && rows[0] || { display_name: '', avatar_url: null, role: 'user', status: 'active', missing: true }; }).catch(function () { state.profile = { display_name: '', avatar_url: null, role: 'user', status: 'active', missing: true }; });
+        var session = state.session;
+        if (!session) { state.profile = null; return Promise.resolve(); }
+        if (profileRequest && profileRequest.token === session.access_token) return profileRequest.promise;
+        var job = { token: session.access_token };
+        function apply(profile) {
+            // A late profile response must never restore a signed-out or replaced account.
+            if (state.session && state.session.access_token === session.access_token && state.session.user.id === session.user.id) state.profile = profile;
+        }
+        job.promise = api('/rest/v1/profiles?id=eq.' + encodeURIComponent(session.user.id) + '&select=display_name,avatar_url,role,status', { token: session.access_token })
+            .then(function (rows) { apply(rows && rows[0] || { role: 'user', status: 'active', missing: true }); })
+            .catch(function () { apply({ role: 'user', status: 'active', missing: true }); })
+            .finally(function () { if (profileRequest === job) profileRequest = null; });
+        profileRequest = job;
+        return job.promise;
+    }
+    function canShowAdmin() {
+        var session = state.session, profile = state.profile;
+        return !!(window.EyeCodeAuth.ready && enabled && !dev && session && session.user && session.user.id
+            && session.access_token && Number.isFinite(session.expires_at) && session.expires_at * 1000 > Date.now()
+            && profile && !profile.missing && profile.role === 'admin' && profile.status === 'active');
+    }
+    function renderAdminLinks() {
+        clearTimeout(adminExpiryTimer);
+        var visible = canShowAdmin();
+        document.querySelectorAll('[data-admin-only]').forEach(function (link) { link.hidden = !visible; });
+        if (visible) adminExpiryTimer = setTimeout(function () {
+            renderAdminLinks(); document.dispatchEvent(new Event('eyecode-profile-change'));
+        }, Math.min(2147483647, Math.max(1, state.session.expires_at * 1000 - Date.now())));
+    }
+    function refreshProfile() {
+        if (!window.EyeCodeAuth.ready) return Promise.resolve();
+        var previous = JSON.stringify(state.profile);
+        return freshSession().then(loadProfile).then(function () {
+            renderHeader();
+            if (JSON.stringify(state.profile) !== previous) document.dispatchEvent(new Event('eyecode-profile-change'));
+        });
     }
 
     // ---- header ----
@@ -177,6 +219,7 @@
         return el('span', { class: cls + ' v2-avatar-fallback', 'aria-hidden': 'true', text: initial });
     }
     function renderHeader() {
+        renderAdminLinks();
         document.querySelectorAll('[data-auth]').forEach(function (root) {
             root.hidden = false; root.textContent = '';
             if (!state.session || !state.profile) {
@@ -282,9 +325,20 @@
         root.appendChild(list);
         load();
     }
-    function renderAll() { renderHeader(); document.querySelectorAll('[data-comments]').forEach(renderComments); window.EyeCodeAuth.ready = true; document.dispatchEvent(new Event('eyecode-auth-change')); }
+    function renderAll() { window.EyeCodeAuth.ready = true; renderHeader(); document.querySelectorAll('[data-comments]').forEach(renderComments); document.dispatchEvent(new Event('eyecode-auth-change')); }
 
-    window.EyeCodeAuth.refresh = function () { state.session = loadSession(); return freshSession().then(loadProfile).then(renderAll); };
+    window.EyeCodeAuth.refresh = function () { window.EyeCodeAuth.ready = false; state.profile = null; state.session = loadSession(); renderAdminLinks(); document.dispatchEvent(new Event('eyecode-profile-change')); return freshSession().then(loadProfile).then(renderAll); };
+    window.EyeCodeAuth.refreshProfile = refreshProfile;
+    document.addEventListener('eyecode-auth-change', renderAdminLinks);
+    document.addEventListener('eyecode-profile-change', renderAdminLinks);
+    // Shared role refresh drives navigation visibility only, including on static Atlas pages.
+    function revalidateHeader() {
+        if (document.visibilityState === 'hidden' || !state.session) return;
+        void refreshProfile();
+    }
+    setInterval(revalidateHeader, 60000);
+    document.addEventListener('visibilitychange', revalidateHeader);
+    window.addEventListener('storage', function (event) { if (event.key === SESSION_KEY || event.key === null) void window.EyeCodeAuth.refresh(); });
     state.session = loadSession();
     completeSignIn().then(freshSession).then(loadProfile).then(renderAll);
     document.addEventListener('v2-language-change', function () { if (state.session && state.profile) renderHeader(); document.querySelectorAll('[data-comments] textarea[data-placeholder-vi]').forEach(function (t) { t.placeholder = lang() === 'en' ? t.dataset.placeholderEn : t.dataset.placeholderVi; }); });

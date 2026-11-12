@@ -1,0 +1,9 @@
+EyeCode Atlas — original figure attribution
+
+| File | Attribution | Original / permission |
+|---|---|---|
+| `transformer-architecture.png` | Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, Illia Polosukhin. *Attention Is All You Need*, NeurIPS 2017, Figure 1, arXiv v7. Unmodified. | [Figure/source](https://arxiv.org/html/1706.03762v7#S3.F1). Google explicitly permits figure/table reproduction in scholarly or journalistic work with attribution, at the top of this paper. This educational research explanation uses that specific permission; no blanket CC license is claimed. |
+| `mamba-architecture.svg` | Albert Gu and Tri Dao. *Mamba: Linear-Time Sequence Modeling with Selective State Spaces*, COLM 2024, Figure 3, arXiv v2. Unmodified. | [Figure/source and license declaration](https://arxiv.org/html/2312.00752v2#S3.F3). [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). |
+| `mamba2-duality.svg` | Tri Dao and Albert Gu. *Transformers are SSMs: Generalized Models and Efficient Algorithms Through Structured State Space Duality*, ICML 2024, Figure 1, arXiv v1. Unmodified. | [Figure/source and license declaration](https://arxiv.org/html/2405.21060v1#S1.F1). [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). |
+
+Original figures are unmodified. Source, author, figure number and permission are also displayed beside each figure.

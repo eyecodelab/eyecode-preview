@@ -103,6 +103,6 @@ export function renderAtlas(data,params){
  }
  return `${toolbar()}<div class="v2-article-layout v2-container" data-topic-open="true" data-toc-open="true">${sidebar(data,view)}<article class="v2-article-content">${heading}${body}</article>${toc(view.model?modelSections:seriesSections)}</div>`;
 }
-export function sourceNotice(data){
- return `<div class="atlas-source v2-container"><p>${data.source==='local'?bi('Nội dung Phase 3 cục bộ · Chỉ đọc.','Local Phase 3 collection · Read only.'):data.source==='sample'?bi('Mẫu học thuật công khai · Không có ghi chú riêng.','Public academic examples · No private notes.'):bi('Dữ liệu riêng từ Supabase · Chỉ đọc.','Private Supabase data · Read only.')} <small>${data.schema==='local'?bi('Được máy chủ phát triển xác thực quyền Admin.','Admin access verified by the development server.'):data.schema==='available'?bi('Đã truy cập endpoint Atlas.','Atlas endpoint reachable.'):bi('Endpoint Atlas chưa khả dụng; chưa xác nhận migration.','Atlas endpoint unavailable; migration not confirmed.')}</small></p><label>${bi('Nguồn','Source')} <select data-atlas-source>${data.source==='local'?`<option value="local" selected>${lang()==='en'?'Local Phase 3 collection':'Nội dung Phase 3 cục bộ'}</option>`:''}<option value="sample" ${data.source==='sample'?'selected':''}>${lang()==='en'?'Public examples':'Ví dụ công khai'}</option><option value="database" ${data.source==='database'?'selected':''}>Supabase</option></select></label></div>`;
+export function sourceNotice(){
+ return `<div class="atlas-source v2-container"><p>${bi('Bộ sưu tập nghiên cứu từ các paper công khai.','Research collection based on public papers.')}</p></div>`;
 }

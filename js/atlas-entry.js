@@ -1,21 +1,20 @@
-import {createAdminAuthorization} from './admin-auth.js';
+// The curated Atlas is intentionally public. Only this navigation entry uses
+// the shared authenticated Admin profile; it never gates or fetches research data.
 const button=document.querySelector('[data-atlas-entry]');
 if(button){
- const access=createAdminAuthorization();
  const root=button.closest('[data-filter-root]'),panel=root.querySelector('[data-atlas-panel]');
- let timer,checking=false;
  function hide(){delete button.dataset.atlasAuthorized;button.hidden=true;if(panel)panel.hidden=true;if(button.getAttribute('aria-pressed')==='true')root.querySelector('[data-filter=""]')?.click();}
- access.subscribe(state=>{if(state.status==='denied')hide();});
- async function check(){
-  if(checking)return;checking=true;
-  try{const state=await access.check();button.hidden=!state.authorized;if(state.authorized){button.dataset.atlasAuthorized='true';if(new URLSearchParams(location.search).get('category')==='atlas')button.click();}}
-  finally{checking=false;}
+ function sync(){
+  const visible=window.EyeCodeAuth?.canShowAdmin?.()===true;
+  const wasVisible=button.dataset.atlasAuthorized==='true';
+  if(!visible){hide();return;}
+  button.hidden=false;button.dataset.atlasAuthorized='true';
+  if(!wasVisible&&new URLSearchParams(location.search).get('category')==='atlas')button.click();
  }
- document.addEventListener('eyecode-auth-change',()=>{clearTimeout(timer);timer=setTimeout(check,50);});
- window.addEventListener('focus',check);
- const interval=setInterval(check,60000);
- window.addEventListener('pagehide',()=>{clearInterval(interval);clearTimeout(timer);hide();access.dispose();});
- window.addEventListener('pageshow',event=>{if(event.persisted)location.reload();});
- document.addEventListener('v2-language-change',()=>{if(!access.getState().authorized)hide();});
- check();
+ document.addEventListener('eyecode-auth-change',sync);
+ document.addEventListener('eyecode-profile-change',sync);
+ document.addEventListener('v2-language-change',sync);
+ window.addEventListener('pagehide',hide);
+ window.addEventListener('pageshow',sync);
+ sync();
 }
